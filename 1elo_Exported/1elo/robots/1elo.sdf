@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sdf version="1,5">
+  <model name="1elo">
+    <pose>0 0 0,1805 0 0 0</pose>
+    <plugin name="clock" filename="libgz_clock.so">
+      <topic>/gazebo/frc/time</topic>
+    </plugin>
+    <link name="Base">
+      <gravity>1</gravity>
+      <self_collide>1</self_collide>
+      <pose>0,02754383841438 -0,0324999877257136 0,0118671448661578 0 0 0</pose>
+      <must_be_base_link>1</must_be_base_link>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <inertial>
+        <mass>0,969171767719336</mass>
+        <pose>-2,42861286636753E-17 0 -3,33066907387547E-16 0 0 0</pose>
+        <inertia>
+          <ixx>0,01029129</ixx>
+          <ixy>0</ixy>
+          <ixz>1E-08</ixz>
+          <iyy>0,00939747</iyy>
+          <iyz>0,00032016</iyz>
+          <izz>0,00149596</izz>
+        </inertia>
+      </inertial>
+      <collision name="Base_collision">
+        <pose>0,0310108134803345 0,0378332906206923 -0,373132855133842 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://1elo/meshes/Base_col.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="Base_visual">
+        <pose>0,0310108134803345 0,0378332906206923 -0,373132855133842 0 0 0</pose>
+        <material>
+          <ambient>0 1 0 1</ambient>
+          <diffuse>0 1 0 1</diffuse>
+        </material>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://1elo/meshes/Base.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="Elo1">
+      <gravity>1</gravity>
+      <self_collide>1</self_collide>
+      <pose>0,0562669992836064 0,0113514801544096 -0,0200411962695232 0 0 0</pose>
+      <must_be_base_link>0</must_be_base_link>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <inertial>
+        <mass>0,0748820782588972</mass>
+        <pose>-3,46944695195361E-17 3,46944695195361E-18 -2,22044604925031E-16 0 0 0</pose>
+        <inertia>
+          <ixx>3,637E-05</ixx>
+          <ixy>5,176E-05</ixy>
+          <ixz>1,61E-06</ixz>
+          <iyy>0,00014824</iyy>
+          <iyz>1,5E-07</iyz>
+          <izz>0,0001778</izz>
+        </inertia>
+      </inertial>
+      <collision name="Elo1_collision">
+        <pose>-0,0128406543997887 0,00911012975146586 -0,405041196269523 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://1elo/meshes/Elo1_col.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="Elo1_visual">
+        <pose>-0,0128406543997887 0,00911012975146586 -0,405041196269523 0 0 0</pose>
+        <material>
+          <ambient>1 0 0 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+        </material>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://1elo/meshes/Elo1.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="Base-Elo1" type="revolute">
+      <parent>Base</parent>
+      <child>Elo1</child>
+      <pose>-0,0461700810682059 -0,0130075377019121 -2,41322517524623E-11 0 1,5707963267949 0</pose>
+      <axis>
+        <xyz>1 0 -2,22044604925031E-16</xyz>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+        </dynamics>
+        <limit>
+          <upper>1,25795774960443</upper>
+          <lower>-2,77672279955056</lower>
+          <effort>1</effort>
+        </limit>
+      </axis>
+    </joint>
+    <plugin name="Base-Elo1_motor" filename="libgz_dc_motor.so">
+      <joint>Base-Elo1</joint>
+      <topic>/gazebo/frc/simulator/pwm/0</topic>
+      <multiplier>0</multiplier>
+    </plugin>
+    <plugin name="Base-Elo1_encoder" filename="libgz_encoder.so">
+      <joint>Base-Elo1</joint>
+      <topic>/gazebo/frc/simulator/dio/0/0</topic>
+      <units>degrees</units>
+    </plugin>
+  </model>
+</sdf>
